@@ -11,12 +11,20 @@ async function main() {
     rellenarCasas(listarCasas(personajes));
     mostrarPersonajes(personajes);
 
-    document.getElementById("filtro-casa").addEventListener("change", (e) => {
-      mostrarPersonajes(filtrarPorCasa(personajes, e.target.value));
-    });
+    const filtro = document.getElementById("filtro-casa");
+
+    filtro.addEventListener("change", filtrar);
+
+    function filtrar() {
+      mostrarPersonajes(filtrarPorCasa(personajes, filtro.value));
+    }
   } catch (error) {
     mostrarError(error.message);
   }
+
 }
+
+
+
 
 main();

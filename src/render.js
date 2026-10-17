@@ -24,3 +24,14 @@ export function mostrarPersonajes(lista) {
   }
   salida().innerHTML = lista.map(tarjeta).join("");
 }
+
+export function rellenarCasas(casas) {
+  const filtro = document.getElementById("filtro-casa");
+
+  filtro.innerHTML = `
+    <option value="">Todas las casas</option>
+    ${casas.map(casa => `
+      <option value="${casa}">${casa}</option>
+    `).join("")}
+  `;
+}
