@@ -1,13 +1,18 @@
 const API = "https://api.potterdb.com/v1";
-
+const LocalStorage = "PERSONAJES-HARRY-POTTER";
 export async function obtenerPersonajes() {
+  
+  const guardado = localStorage.getItem(LocalStorage);
+  if (guardado){ 
+    return JSON.parse(guardado);
+  }
   const personajes = [];
   let hayMas = true;
   let pagina = 1;
 
   while (hayMas) {
     const respuesta = await fetch(`${API}/characters?page[number]=${pagina}`);
-
+    
     if (!respuesta.ok) {
       throw new Error(`HTTP ${respuesta.status}: ${respuesta.statusText}`);
     }
@@ -41,6 +46,8 @@ export async function obtenerPersonajes() {
     hayMas = Boolean(json.links?.next) && datos.length > 0;
     pagina++;
   }
-
+  if (personajes.length > 0) { 
+      localStorage.setItem(LocalStorage, JSON.stringify(personajes));  
+  }
   return personajes;
 }
