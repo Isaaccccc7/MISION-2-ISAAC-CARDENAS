@@ -1,9 +1,5 @@
-export const limpiarPersonajes = (lista) =>
-  lista.map(p => ({
-    nombre: p.attributes.name,
-    casa: p.attributes.house ?? "Sin casa",
-  }));
+export const filtrarPorCasa = (lista, casa) =>
+  casa === "" ? lista : lista.filter(p => p.casa === casa);
 
-export const filtrarPorNombre = (lista, texto) =>
-  lista.filter(p => p.nombre.toLowerCase().includes(texto.toLowerCase()));
-
+export const listarCasas = (lista) =>
+   [...new Set(lista.map(p => p.casa))].toSorted();
